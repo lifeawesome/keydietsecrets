@@ -40,7 +40,13 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
       title,
       slug,
       excerpt,
-      body,
+      body[]{
+        ...,
+        _type == "downloadBox" => {
+          ...,
+          "fileUrl": file.asset->url,
+        }
+      },
       publishedAt,
       "category": category->{_id, title, slug}
     }

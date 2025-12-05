@@ -2,6 +2,7 @@
 import { PortableText, PortableTextBlock } from "@portabletext/react";
 import { getArticleBySlug } from "@/lib/queries";
 import Link from "next/link";
+import { DownloadBox } from "@/components/DownloadBox";
 
 type Props = {
   params: {
@@ -59,7 +60,34 @@ export default async function ArticlePage({ params }: Props) {
 
       {article.body && (
         <div className="prose prose-lg prose-stone rounded-2xl bg-white p-8 shadow-lg ring-1 ring-stone-200/50 md:p-12">
-          <PortableText value={article.body as PortableTextBlock[]} />
+          <PortableText
+            value={article.body as PortableTextBlock[]}
+            components={{
+              types: {
+                downloadBox: ({
+                  value,
+                }: {
+                  value: {
+                    label?: string | null;
+                    title: string;
+                    description?: string | null;
+                    buttonLabel?: string | null;
+                    fileUrl?: string | null;
+                    affiliateUrl?: string | null;
+                  };
+                }) => (
+                  <DownloadBox
+                    label={value.label}
+                    title={value.title}
+                    description={value.description}
+                    buttonLabel={value.buttonLabel}
+                    fileUrl={value.fileUrl}
+                    affiliateUrl={value.affiliateUrl}
+                  />
+                ),
+              },
+            }}
+          />
         </div>
       )}
     </article>
