@@ -10,7 +10,7 @@ export default defineType({
       name: "title",
       title: "Title",
       type: "string",
-      validation: (Rule: { required: () => unknown }) => Rule.required(),
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "slug",
@@ -20,7 +20,7 @@ export default defineType({
         source: "title",
         maxLength: 96,
       },
-      validation: (Rule: { required: () => unknown }) => Rule.required(),
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "excerpt",
@@ -32,7 +32,7 @@ export default defineType({
       title: "Category",
       type: "reference",
       to: [{ type: "category" }],
-      validation: (Rule: { required: () => unknown }) => Rule.required(),
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "body",

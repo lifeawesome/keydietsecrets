@@ -20,7 +20,7 @@ export default function HomePage() {
           {/* Left Column - Main Content */}
           <div>
             <h1 className="font-serif text-4xl font-bold leading-tight text-stone-900 md:text-5xl lg:text-6xl">
-              The truth about what really works for weight loss.
+              The truth about what actually works for losing weight.
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-stone-700 md:text-xl">
               Cut through the noise with science-backed strategies that help you
