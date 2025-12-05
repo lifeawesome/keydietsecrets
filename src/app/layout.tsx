@@ -35,13 +35,26 @@ export default function RootLayout({
       >
         <header className="border-b border-stone-200 bg-white shadow-sm">
           <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
-            <Link href="/" className="group flex items-center gap-2">
-              <div className="text-2xl font-bold tracking-tight transition-colors">
-                Key
-                <span className="text-emerald-600 group-hover:text-emerald-700">
-                  Diet
-                </span>
-                Secrets
+            <Link href="/" className="group flex items-center gap-3 transition-all hover:scale-105">
+              {/* Key Icon */}
+              <div className="relative">
+                <div className="absolute -inset-1 rounded-lg bg-gradient-to-br from-emerald-400 to-emerald-600 opacity-20 blur group-hover:opacity-30 transition-opacity"></div>
+                <div className="relative flex h-11 w-11 items-center justify-center rounded-lg bg-gradient-to-br from-emerald-500 to-emerald-600 shadow-lg shadow-emerald-600/25">
+                  <svg className="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+                  </svg>
+                </div>
+              </div>
+              {/* Logo Text */}
+              <div className="flex flex-col">
+                <div className="text-xl font-extrabold leading-none tracking-tight text-stone-900">
+                  <span className="text-stone-900">Key</span>
+                  <span className="text-emerald-600">Diet</span>
+                  <span className="text-stone-900">Secrets</span>
+                </div>
+                <div className="mt-0.5 text-[10px] font-semibold uppercase tracking-wider text-stone-500">
+                  Science-Based Weight Loss
+                </div>
               </div>
             </Link>
             <nav className="flex gap-8 text-[15px] font-medium">
