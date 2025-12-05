@@ -1,65 +1,123 @@
-import Image from "next/image";
-
-export default function Home() {
+// app/page.tsx
+export default function HomePage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <section className="space-y-12">
+      <div className="rounded-2xl bg-gradient-to-br from-white to-emerald-50/30 p-10 shadow-lg ring-1 ring-stone-200/50 md:p-12">
+        <h1 className="font-serif text-4xl font-bold leading-tight text-stone-900 md:text-5xl lg:text-6xl">
+          The truth about what really works for weight loss.
+        </h1>
+        <p className="mt-6 text-lg leading-relaxed text-stone-700 md:text-xl">
+          Cut through the noise with science-backed strategies that help you
+          lose weight and keep it off. No gimmicks, no fads—just what actually
+          works.
+        </p>
+        <form className="mt-8 flex flex-col gap-3 md:flex-row">
+          <input
+            type="email"
+            placeholder="Enter your email for the 7-Day Fat-Loss Starter Kit"
+            className="flex-1 rounded-lg border-2 border-stone-300 px-4 py-3.5 text-base shadow-sm transition-all placeholder:text-stone-400 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+          />
+          <button
+            type="submit"
+            className="rounded-lg bg-emerald-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-emerald-600/20 transition-all hover:bg-emerald-700 hover:shadow-xl hover:shadow-emerald-600/30"
+          >
+            Get the 7-Day Kit
+          </button>
+        </form>
+        <p className="mt-3 text-sm text-stone-600">
+          You&apos;ll get a simple 7-day meal plan plus the science behind why
+          it works.
+        </p>
+      </div>
+
+      <div className="grid gap-6 md:grid-cols-2 lg:gap-8">
+        <div className="group rounded-2xl bg-white p-8 shadow-md ring-1 ring-stone-200/50 transition-all hover:shadow-xl hover:ring-emerald-200">
+          <div className="mb-4 inline-flex rounded-lg bg-emerald-50 p-3">
+            <svg
+              className="h-6 w-6 text-emerald-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </div>
+          <h2 className="text-xl font-semibold text-stone-900">
+            Start with the basics
+          </h2>
+          <p className="mt-3 leading-relaxed text-stone-600">
+            New here? Begin with our guide on how weight loss actually
+            works—without the myths.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
           <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/weight-loss"
+            className="mt-5 inline-flex items-center gap-2 font-semibold text-emerald-600 transition-colors hover:text-emerald-700"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
+            Explore weight loss guides
+            <svg
+              className="h-4 w-4 transition-transform group-hover:translate-x-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
           </a>
         </div>
-      </main>
-    </div>
+        <div className="group rounded-2xl bg-white p-8 shadow-md ring-1 ring-stone-200/50 transition-all hover:shadow-xl hover:ring-emerald-200">
+          <div className="mb-4 inline-flex rounded-lg bg-emerald-50 p-3">
+            <svg
+              className="h-6 w-6 text-emerald-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
+              />
+            </svg>
+          </div>
+          <h2 className="text-xl font-semibold text-stone-900">
+            Tools that really help
+          </h2>
+          <p className="mt-3 leading-relaxed text-stone-600">
+            From smart scales to tracking apps, see which tools are worth your
+            time and money.
+          </p>
+          <a
+            href="/tools-and-tech"
+            className="mt-5 inline-flex items-center gap-2 font-semibold text-emerald-600 transition-colors hover:text-emerald-700"
+          >
+            See our recommendations
+            <svg
+              className="h-4 w-4 transition-transform group-hover:translate-x-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
   );
 }
