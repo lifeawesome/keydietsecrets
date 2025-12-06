@@ -2,6 +2,33 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
+const addToContactList = async (resend: Resend, email: string) => {
+  // Only add to list if RESEND_AUDIENCE_ID is configured
+  const audienceId = process.env.RESEND_SEGMENT_NEWSLETTER;
+  if (!audienceId) {
+    console.log(
+      "RESEND_SEGMENT_NEWSLETTER not configured, skipping contact list addition"
+    );
+    return;
+  }
+
+  try {
+    const { error } = await resend.contacts.create({
+      email,
+      audienceId,
+      unsubscribed: false,
+    });
+
+    if (error) {
+      console.error("Failed to add contact to list:", error);
+    } else {
+      console.log("Contact added to list:", email);
+    }
+  } catch (err) {
+    console.error("Error adding contact to list:", err);
+  }
+};
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -72,7 +99,7 @@ export async function POST(request: NextRequest) {
             </div>
             <div style="background: #ffffff; padding: 30px; border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 8px 8px;">
               <p style="font-size: 16px; margin-top: 0;">Hi there,</p>
-              <p style="font-size: 16px;">Thank you for your interest in KeyDietSecrets! As requested, we've attached your download to this email.</p>
+              <p style="font-size: 16px;">Thank you for using KeyDietSecrets.com! As requested, we've attached your download to this email.</p>
               <p style="font-size: 16px;">If you have any questions or need help, feel free to reply to this email.</p>
               <p style="font-size: 16px; margin-bottom: 0;">Best regards,<br>The KeyDietSecrets Team</p>
             </div>
@@ -104,11 +131,8 @@ export async function POST(request: NextRequest) {
       timestamp: new Date().toISOString(),
     });
 
-    // TODO: Optionally add the email to your list management service here
-    // Examples:
-    // - Mailchimp: https://mailchimp.com/developer/
-    // - ConvertKit: https://developers.convertkit.com/
-    // - ActiveCampaign: https://developers.activecampaign.com/
+    // Add email to contact list
+    await addToContactList(resend, email);
 
     // Return success
     return NextResponse.json(
