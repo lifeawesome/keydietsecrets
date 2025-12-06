@@ -7,12 +7,12 @@ import { DownloadBox } from "@/components/DownloadBox";
 type Props = {
   params: {
     categorySlug: string;
-    slug: string;
+    articleSlug: string;
   };
 };
 
 export default async function ArticlePage({ params }: Props) {
-  const article = await getArticleBySlug(params.slug);
+  const article = await getArticleBySlug(params.articleSlug);
 
   if (!article) {
     return (
