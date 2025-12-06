@@ -38,7 +38,12 @@ export default defineType({
       name: "body",
       title: "Body",
       type: "array",
-      of: [{ type: "block" }, { type: "downloadBox" }],
+      of: [
+        { type: "block" },
+        { type: "imageBlock" },
+        { type: "affiliateLink" },
+        { type: "downloadBox" },
+      ],
     }),
     defineField({
       name: "publishedAt",

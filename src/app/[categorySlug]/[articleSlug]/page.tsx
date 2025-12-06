@@ -3,6 +3,8 @@ import { PortableText, PortableTextBlock } from "@portabletext/react";
 import { getArticleBySlug } from "@/lib/queries";
 import Link from "next/link";
 import { DownloadBox } from "@/components/DownloadBox";
+import { ImageBlock } from "@/components/ImageBlock";
+import { AffiliateLink } from "@/components/AffiliateLink";
 
 type DownloadBoxType = {
   _type: "downloadBox";
@@ -107,6 +109,29 @@ export default async function ArticlePage({ params }: Props) {
                       // Don't render download boxes inline - they're in the sidebar
                       return null;
                     },
+                    imageBlock: ({ value }) => (
+                      <div className="not-prose">
+                        <ImageBlock
+                          image={value.image}
+                          alt={value.alt}
+                          caption={value.caption}
+                        />
+                      </div>
+                    ),
+                    affiliateLink: ({ value }) => (
+                      <div className="not-prose">
+                        <AffiliateLink
+                          linkType={value.linkType}
+                          linkText={value.linkText}
+                          image={value.image}
+                          imageUrl={value.imageUrl}
+                          alt={value.alt}
+                          url={value.url}
+                          openInNewTab={value.openInNewTab}
+                          description={value.description}
+                        />
+                      </div>
+                    ),
                   },
                 }}
               />

@@ -25,6 +25,14 @@ The `/api/subscribe` endpoint requires these environment variables to send email
   - DO NOT use `onboarding@resend.dev` in production (only for testing)
   - The application will return a 500 error if this is not set
 
+#### `RESEND_SEGMENT_NEWSLETTER` (Optional)
+
+- **Description**: Your Resend Audience ID for adding subscribers to your newsletter list
+- **Get it from**: [https://resend.com/audiences](https://resend.com/audiences)
+- **Format**: Audience ID string
+- **Example**: `RESEND_SEGMENT_NEWSLETTER=aud_xxxxxxxxxxxxx`
+- **Note**: If not set, emails will still be sent but users won't be added to your mailing list
+
 ## Setup Instructions
 
 1. Create a `.env.local` file in the root directory:
@@ -38,6 +46,7 @@ The `/api/subscribe` endpoint requires these environment variables to send email
    ```env
    RESEND_API_KEY=re_your_actual_api_key
    RESEND_FROM_EMAIL="KeyDietSecrets <hello@yourdomain.com>"
+   RESEND_SEGMENT_NEWSLETTER=aud_your_audience_id
    ```
 
 3. Verify your domain in Resend:
