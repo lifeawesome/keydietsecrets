@@ -32,6 +32,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Check if sender email is configured with a verified domain
+    if (!process.env.RESEND_FROM_EMAIL) {
+      console.error("RESEND_FROM_EMAIL is not configured");
+      return NextResponse.json(
+        { error: "Email service is not configured. Please contact support." },
+        { status: 500 }
+      );
+    }
+
     // Initialize Resend client after validating API key exists
     const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -45,13 +54,9 @@ export async function POST(request: NextRequest) {
     const fileName =
       new URL(fileUrl).pathname.split("/").pop() || "download.pdf";
 
-    // Get the "from" email address from environment or use default
-    const fromEmail =
-      process.env.RESEND_FROM_EMAIL || "KeyDietSecrets <onboarding@resend.dev>";
-
     // Send email with file attachment
     const { data, error: resendError } = await resend.emails.send({
-      from: fromEmail,
+      from: process.env.RESEND_FROM_EMAIL,
       to: email,
       subject: "Your Download from KeyDietSecrets",
       html: `
