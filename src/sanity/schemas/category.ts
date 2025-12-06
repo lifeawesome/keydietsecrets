@@ -25,11 +25,5 @@ export default defineType({
       title: "Description",
       type: "text",
     }),
-    defineField({
-      name: "seo",
-      title: "SEO Metadata",
-      type: "seo",
-      description: "Search engine optimization settings for this category",
-    }),
   ],
 });

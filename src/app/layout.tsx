@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Inter, Merriweather } from "next/font/google";
 import Link from "next/link";
 import Script from "next/script";
+import { MobileMenu } from "@/components/MobileMenu";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -92,7 +93,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 </div>
               </div>
             </Link>
-            <nav className="flex gap-8 text-[15px] font-medium">
+            <nav className="hidden gap-8 text-[15px] font-medium md:flex">
               <Link
                 href="/weight-loss"
                 className="text-stone-700 transition-colors hover:text-emerald-600"
@@ -118,6 +119,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 Tools & Tech
               </Link>
             </nav>
+            <MobileMenu />
           </div>
         </header>
         <main className="mx-auto max-w-6xl px-6 py-12">{children}</main>

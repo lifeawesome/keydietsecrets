@@ -2,9 +2,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
-// Initialize Resend client
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -35,6 +32,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Initialize Resend client after validating API key exists
+    const resend = new Resend(process.env.RESEND_API_KEY);
+
     // Fetch the file from Sanity
     const fileResponse = await fetch(fileUrl);
     if (!fileResponse.ok) {
@@ -42,7 +42,8 @@ export async function POST(request: NextRequest) {
     }
 
     const fileBuffer = await fileResponse.arrayBuffer();
-    const fileName = fileUrl.split("/").pop() || "download.pdf";
+    const fileName =
+      new URL(fileUrl).pathname.split("/").pop() || "download.pdf";
 
     // Get the "from" email address from environment or use default
     const fromEmail =
@@ -79,7 +80,7 @@ export async function POST(request: NextRequest) {
       attachments: [
         {
           filename: fileName,
-          content: Buffer.from(fileBuffer),
+          content: Buffer.from(fileBuffer).toString("base64"),
         },
       ],
     });
