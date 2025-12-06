@@ -38,10 +38,7 @@ export default defineType({
       name: "body",
       title: "Body",
       type: "array",
-      of: [
-        { type: "block" },
-        { type: "downloadBox" },
-      ],
+      of: [{ type: "block" }, { type: "downloadBox" }],
     }),
     defineField({
       name: "publishedAt",
@@ -53,6 +50,18 @@ export default defineType({
       title: "Featured",
       type: "boolean",
       initialValue: false,
+    }),
+    defineField({
+      name: "downloadBox",
+      title: "Article Download",
+      type: "downloadBox",
+      description: "Optional downloadable file attached to this article",
+    }),
+    defineField({
+      name: "seo",
+      title: "SEO Metadata",
+      type: "seo",
+      description: "Search engine optimization settings for this article",
     }),
   ],
 });

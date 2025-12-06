@@ -2,6 +2,40 @@
 import { sanityClient } from "./sanity.client";
 import type { PortableTextBlock } from "@portabletext/react";
 
+export type SEO = {
+  metaTitle?: string;
+  metaDescription?: string;
+  keywords?: string[];
+  ogImage?: {
+    asset: {
+      _ref: string;
+      _type: "reference";
+    };
+    alt?: string;
+  };
+  ogImageUrl?: string;
+  twitterImage?: {
+    asset: {
+      _ref: string;
+      _type: "reference";
+    };
+    alt?: string;
+  };
+  twitterImageUrl?: string;
+  canonicalUrl?: string;
+  noindex?: boolean;
+  nofollow?: boolean;
+};
+
+export type DownloadBoxData = {
+  label?: string | null;
+  title: string;
+  description?: string | null;
+  buttonLabel?: string | null;
+  fileUrl?: string | null;
+  affiliateUrl?: string | null;
+};
+
 export type Article = {
   _id: string;
   title: string;
@@ -14,6 +48,8 @@ export type Article = {
     slug: { current: string };
   };
   publishedAt?: string;
+  downloadBox?: DownloadBoxData;
+  seo?: SEO;
 };
 
 export async function getArticlesByCategorySlug(
@@ -48,7 +84,33 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
         }
       },
       publishedAt,
-      "category": category->{_id, title, slug}
+      "category": category->{_id, title, slug},
+      downloadBox{
+        label,
+        title,
+        description,
+        buttonLabel,
+        "fileUrl": file.asset->url,
+        affiliateUrl
+      },
+      seo{
+        metaTitle,
+        metaDescription,
+        keywords,
+        ogImage{
+          asset,
+          alt
+        },
+        "ogImageUrl": ogImage.asset->url,
+        twitterImage{
+          asset,
+          alt
+        },
+        "twitterImageUrl": twitterImage.asset->url,
+        canonicalUrl,
+        noindex,
+        nofollow
+      }
     }
   `;
   return sanityClient.fetch(query, { slug });

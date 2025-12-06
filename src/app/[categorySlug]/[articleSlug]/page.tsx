@@ -5,14 +5,15 @@ import Link from "next/link";
 import { DownloadBox } from "@/components/DownloadBox";
 
 type Props = {
-  params: {
+  params: Promise<{
     categorySlug: string;
-    slug: string;
-  };
+    articleSlug: string;
+  }>;
 };
 
 export default async function ArticlePage({ params }: Props) {
-  const article = await getArticleBySlug(params.slug);
+  const { articleSlug } = await params;
+  const article = await getArticleBySlug(articleSlug);
 
   if (!article) {
     return (
@@ -36,7 +37,7 @@ export default async function ArticlePage({ params }: Props) {
   }
 
   return (
-    <article className="mx-auto max-w-3xl">
+    <article className="mx-auto max-w-7xl">
       <header className="mb-10 space-y-4">
         {article.category && (
           <div className="inline-block rounded-full bg-emerald-100 px-4 py-1.5 text-sm font-medium text-emerald-800">
@@ -58,38 +59,63 @@ export default async function ArticlePage({ params }: Props) {
         )}
       </header>
 
-      {article.body && (
-        <div className="prose prose-lg prose-stone rounded-2xl bg-white p-8 shadow-lg ring-1 ring-stone-200/50 md:p-12">
-          <PortableText
-            value={article.body as PortableTextBlock[]}
-            components={{
-              types: {
-                downloadBox: ({
-                  value,
-                }: {
-                  value: {
-                    label?: string | null;
-                    title: string;
-                    description?: string | null;
-                    buttonLabel?: string | null;
-                    fileUrl?: string | null;
-                    affiliateUrl?: string | null;
-                  };
-                }) => (
-                  <DownloadBox
-                    label={value.label}
-                    title={value.title}
-                    description={value.description}
-                    buttonLabel={value.buttonLabel}
-                    fileUrl={value.fileUrl}
-                    affiliateUrl={value.affiliateUrl}
-                  />
-                ),
-              },
-            }}
-          />
+      <div
+        className={`grid gap-8 ${
+          article.downloadBox ? "lg:grid-cols-3" : "max-w-3xl mx-auto"
+        }`}
+      >
+        <div
+          className={`prose prose-lg prose-stone rounded-2xl bg-white p-8 shadow-lg ring-1 ring-stone-200/50 md:p-12 ${
+            article.downloadBox ? "lg:col-span-2" : ""
+          }`}
+        >
+          {article.body && (
+            <PortableText
+              value={article.body as PortableTextBlock[]}
+              components={{
+                types: {
+                  downloadBox: ({
+                    value,
+                  }: {
+                    value: {
+                      label?: string | null;
+                      title: string;
+                      description?: string | null;
+                      buttonLabel?: string | null;
+                      fileUrl?: string | null;
+                      affiliateUrl?: string | null;
+                    };
+                  }) => (
+                    <DownloadBox
+                      label={value.label}
+                      title={value.title}
+                      description={value.description}
+                      buttonLabel={value.buttonLabel}
+                      fileUrl={value.fileUrl}
+                      affiliateUrl={value.affiliateUrl}
+                    />
+                  ),
+                },
+              }}
+            />
+          )}
         </div>
-      )}
+
+        {article.downloadBox && (
+          <aside className="lg:col-span-1">
+            <div className="sticky top-8">
+              <DownloadBox
+                label={article.downloadBox.label}
+                title={article.downloadBox.title}
+                description={article.downloadBox.description}
+                buttonLabel={article.downloadBox.buttonLabel}
+                fileUrl={article.downloadBox.fileUrl}
+                affiliateUrl={article.downloadBox.affiliateUrl}
+              />
+            </div>
+          </aside>
+        )}
+      </div>
     </article>
   );
 }

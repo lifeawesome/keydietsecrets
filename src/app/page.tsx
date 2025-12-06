@@ -23,9 +23,9 @@ export default function HomePage() {
               The truth about what actually works for losing weight.
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-stone-700 md:text-xl">
-              Cut through the noise with science-backed strategies that help you
-              lose weight and keep it off. No gimmicks, no fads—just what
-              actually works.
+              Cut through the fat-loss fluff with science-backed strategies that
+              help you lose weight and keep it off. No gimmicks, no fads—just
+              what actually works.
             </p>
 
             {/* Key Benefits */}
