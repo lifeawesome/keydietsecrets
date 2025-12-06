@@ -44,9 +44,9 @@ export function DownloadBox({
           {hasAffiliate && (
             <p className="mt-3 text-xs text-slate-500">
               This resource may include recommendations with affiliate links. If
-              you choose to purchase through them, we may earn a small commission
-              at no extra cost to you. It helps support KeyDietSecrets and keeps
-              guides like this free.
+              you choose to purchase through them, we may earn a small
+              commission at no extra cost to you. It helps support
+              KeyDietSecrets and keeps guides like this free.
             </p>
           )}
         </div>
@@ -78,4 +78,3 @@ export function DownloadBox({
     </section>
   );
 }
-

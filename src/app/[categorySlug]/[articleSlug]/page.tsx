@@ -5,14 +5,15 @@ import Link from "next/link";
 import { DownloadBox } from "@/components/DownloadBox";
 
 type Props = {
-  params: {
+  params: Promise<{
     categorySlug: string;
     articleSlug: string;
-  };
+  }>;
 };
 
 export default async function ArticlePage({ params }: Props) {
-  const article = await getArticleBySlug(params.articleSlug);
+  const { articleSlug } = await params;
+  const article = await getArticleBySlug(articleSlug);
 
   if (!article) {
     return (
@@ -76,14 +77,16 @@ export default async function ArticlePage({ params }: Props) {
                     affiliateUrl?: string | null;
                   };
                 }) => (
-                  <DownloadBox
-                    label={value.label}
-                    title={value.title}
-                    description={value.description}
-                    buttonLabel={value.buttonLabel}
-                    fileUrl={value.fileUrl}
-                    affiliateUrl={value.affiliateUrl}
-                  />
+                  <div className="not-prose">
+                    <DownloadBox
+                      label={value.label}
+                      title={value.title}
+                      description={value.description}
+                      buttonLabel={value.buttonLabel}
+                      fileUrl={value.fileUrl}
+                      affiliateUrl={value.affiliateUrl}
+                    />
+                  </div>
                 ),
               },
             }}
