@@ -16,6 +16,17 @@ export type Article = {
   publishedAt?: string;
 };
 
+export type SiteSettings = {
+  heroCta?: {
+    badge: string;
+    subtitle: string;
+    buttonText: string;
+    description: string;
+    fileUrl?: string;
+    socialProof?: string;
+  };
+};
+
 export async function getArticlesByCategorySlug(
   categorySlug: string
 ): Promise<Article[]> {
@@ -52,4 +63,20 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
     }
   `;
   return sanityClient.fetch(query, { slug });
+}
+
+export async function getSiteSettings(): Promise<SiteSettings | null> {
+  const query = `
+    *[_type == "siteSettings"][0]{
+      heroCta{
+        badge,
+        subtitle,
+        buttonText,
+        description,
+        "fileUrl": file.asset->url,
+        socialProof
+      }
+    }
+  `;
+  return sanityClient.fetch(query);
 }

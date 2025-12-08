@@ -1,5 +1,11 @@
 // app/page.tsx
-export default function HomePage() {
+import Link from "next/link";
+import { getSiteSettings } from "@/lib/queries";
+import { HeroCTA } from "@/components/HeroCTA";
+
+export default async function HomePage() {
+  const settings = await getSiteSettings();
+
   return (
     <section className="space-y-12">
       {/* Hero Section */}
@@ -58,80 +64,16 @@ export default function HomePage() {
           </div>
 
           {/* Right Column - CTA Box */}
-          <div className="flex flex-col justify-center">
-            <div className="rounded-xl border-2 border-emerald-200 bg-emerald-50/50 p-8 shadow-sm">
-              <div className="mb-4 flex items-center gap-2">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-600">
-                  <svg
-                    className="h-6 w-6 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="font-bold text-stone-900">
-                    Free 7-Day Starter Kit
-                  </h3>
-                  <p className="text-sm text-stone-600">Get started today</p>
-                </div>
-              </div>
-
-              <form className="space-y-3">
-                <input
-                  type="email"
-                  placeholder="Enter your email address"
-                  className="w-full rounded-lg border-2 border-emerald-300 bg-white px-4 py-3.5 text-base shadow-sm transition-all placeholder:text-stone-400 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
-                />
-                <button
-                  type="submit"
-                  className="w-full rounded-lg bg-emerald-600 px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-emerald-600/20 transition-all hover:bg-emerald-700 hover:shadow-xl hover:shadow-emerald-600/30"
-                >
-                  Get Your Free Kit →
-                </button>
-              </form>
-
-              <div className="mt-4 flex items-start gap-2 text-sm text-stone-600">
-                <svg
-                  className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-600"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-                <p>
-                  Includes a complete 7-day meal plan, shopping list, and the
-                  science explaining why it works.
-                </p>
-              </div>
-            </div>
-
-            {/* Social Proof */}
-            <div className="mt-6 flex items-center gap-2 text-sm text-stone-500">
-              <div className="flex -space-x-2">
-                {[1, 2, 3].map((i) => (
-                  <div
-                    key={i}
-                    className="h-8 w-8 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 ring-2 ring-white"
-                  ></div>
-                ))}
-              </div>
-              <span>Join 1,000+ people on their weight loss journey</span>
-            </div>
-          </div>
+          {settings?.heroCta && (
+            <HeroCTA
+              badge={settings.heroCta.badge}
+              subtitle={settings.heroCta.subtitle}
+              buttonText={settings.heroCta.buttonText}
+              description={settings.heroCta.description}
+              fileUrl={settings.heroCta.fileUrl}
+              socialProof={settings.heroCta.socialProof}
+            />
+          )}
         </div>
       </div>
 
@@ -159,7 +101,7 @@ export default function HomePage() {
             New here? Begin with our guide on how weight loss actually
             works—without the myths.
           </p>
-          <a
+          <Link
             href="/weight-loss"
             className="mt-5 inline-flex items-center gap-2 font-semibold text-emerald-600 transition-colors hover:text-emerald-700"
           >
@@ -177,7 +119,7 @@ export default function HomePage() {
                 d="M9 5l7 7-7 7"
               />
             </svg>
-          </a>
+          </Link>
         </div>
         <div className="group rounded-2xl bg-white p-8 shadow-md ring-1 ring-stone-200/50 transition-all hover:shadow-xl hover:ring-emerald-200">
           <div className="mb-4 inline-flex rounded-lg bg-emerald-50 p-3">
@@ -202,7 +144,7 @@ export default function HomePage() {
             From smart scales to tracking apps, see which tools are worth your
             time and money.
           </p>
-          <a
+          <Link
             href="/tools-and-tech"
             className="mt-5 inline-flex items-center gap-2 font-semibold text-emerald-600 transition-colors hover:text-emerald-700"
           >
@@ -220,7 +162,7 @@ export default function HomePage() {
                 d="M9 5l7 7-7 7"
               />
             </svg>
-          </a>
+          </Link>
         </div>
       </div>
     </section>
