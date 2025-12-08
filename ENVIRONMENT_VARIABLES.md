@@ -8,7 +8,7 @@ This document describes the required environment variables for the KeyDietSecret
 
 #### `SANITY_STUDIO_PASSWORD` (Required for Production)
 
-- **Description**: Password to protect your Sanity Studio at `/sanity`
+- **Description**: Password to protect your Sanity Studio at `/studio`
 - **Format**: Any secure password
 - **Example**: `SANITY_STUDIO_PASSWORD=your_secure_password_here`
 - **Important**:

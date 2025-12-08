@@ -2,7 +2,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export const config = {
-  matcher: "/sanity/:path*",
+  matcher: "/studio/:path*",
 };
 
 export function middleware(req: NextRequest) {
