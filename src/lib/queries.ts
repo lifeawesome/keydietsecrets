@@ -56,6 +56,21 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
         _type == "downloadBox" => {
           ...,
           "fileUrl": file.asset->url,
+        },
+        _type == "affiliateOfferReference" => {
+          ...,
+          "offer": offer->{
+            offerName,
+            linkType,
+            linkText,
+            image,
+            imageUrl,
+            alt,
+            url,
+            openInNewTab,
+            description,
+            merchantName
+          }
         }
       },
       publishedAt,

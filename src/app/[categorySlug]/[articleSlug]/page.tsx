@@ -5,6 +5,7 @@ import Link from "next/link";
 import { DownloadBox } from "@/components/DownloadBox";
 import { ImageBlock } from "@/components/ImageBlock";
 import { AffiliateLink } from "@/components/AffiliateLink";
+import { AffiliateOfferReference } from "@/components/AffiliateOfferReference";
 
 type DownloadBoxType = {
   _type: "downloadBox";
@@ -129,6 +130,15 @@ export default async function ArticlePage({ params }: Props) {
                           url={value.url}
                           openInNewTab={value.openInNewTab}
                           description={value.description}
+                        />
+                      </div>
+                    ),
+                    affiliateOfferReference: ({ value }) => (
+                      <div className="not-prose">
+                        <AffiliateOfferReference
+                          offer={value.offer}
+                          overrideText={value.overrideText}
+                          overrideDescription={value.overrideDescription}
                         />
                       </div>
                     ),

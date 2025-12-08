@@ -42,6 +42,7 @@ export default defineType({
         { type: "block" },
         { type: "imageBlock" },
         { type: "affiliateLink" },
+        { type: "affiliateOfferReference" },
         { type: "downloadBox" },
       ],
     }),
