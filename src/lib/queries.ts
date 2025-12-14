@@ -7,6 +7,12 @@ export type Article = {
   title: string;
   slug: { current: string };
   excerpt?: string;
+  mainImage?: {
+    asset: { _ref: string; _type: string };
+    alt?: string;
+    caption?: string;
+  };
+  pullQuote?: string;
   body?: PortableTextBlock[];
   category?: {
     _id: string;
@@ -37,6 +43,8 @@ export async function getArticlesByCategorySlug(
         title,
         slug,
         excerpt,
+        mainImage,
+        pullQuote,
         publishedAt,
         "category": category->{_id, title, slug}
       }
@@ -51,6 +59,8 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
       title,
       slug,
       excerpt,
+      mainImage,
+      pullQuote,
       body[]{
         ...,
         _type == "downloadBox" => {

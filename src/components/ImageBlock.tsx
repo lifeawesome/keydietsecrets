@@ -33,3 +33,6 @@ export function ImageBlock({ image, alt, caption }: ImageBlockProps) {
     </figure>
   );
 }
+
+
+

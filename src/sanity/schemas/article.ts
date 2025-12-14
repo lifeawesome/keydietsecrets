@@ -28,6 +28,37 @@ export default defineType({
       type: "text",
     }),
     defineField({
+      name: "mainImage",
+      title: "Main Image",
+      type: "image",
+      description: "Optional featured image for the post",
+      options: {
+        hotspot: true,
+      },
+      fields: [
+        defineField({
+          name: "alt",
+          title: "Alt Text",
+          type: "string",
+          description: "Alternative text for accessibility and SEO",
+        }),
+        defineField({
+          name: "caption",
+          title: "Caption",
+          type: "string",
+          description: "Optional caption to display below the image",
+        }),
+      ],
+    }),
+    defineField({
+      name: "pullQuote",
+      title: "Pull Quote",
+      type: "text",
+      rows: 3,
+      description:
+        "Optional highlighted quote to make the content more engaging",
+    }),
+    defineField({
       name: "category",
       title: "Category",
       type: "reference",

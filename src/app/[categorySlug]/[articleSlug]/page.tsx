@@ -2,10 +2,12 @@
 import { PortableText, PortableTextBlock } from "@portabletext/react";
 import { getArticleBySlug } from "@/lib/queries";
 import Link from "next/link";
+import Image from "next/image";
 import { DownloadBox } from "@/components/DownloadBox";
 import { ImageBlock } from "@/components/ImageBlock";
 import { AffiliateLink } from "@/components/AffiliateLink";
 import { AffiliateOfferReference } from "@/components/AffiliateOfferReference";
+import { urlForImage } from "@/lib/sanity";
 
 type DownloadBoxType = {
   _type: "downloadBox";
@@ -91,6 +93,28 @@ export default async function ArticlePage({ params }: Props) {
             )}
           </header>
 
+          {/* Featured Image */}
+          {article.mainImage && (
+            <div className="mb-10 overflow-hidden rounded-2xl shadow-lg ring-1 ring-stone-200/50">
+              <Image
+                src={urlForImage(article.mainImage)
+                  .width(1200)
+                  .height(675)
+                  .url()}
+                alt={article.mainImage.alt || article.title}
+                width={1200}
+                height={675}
+                className="h-auto w-full object-cover"
+                priority
+              />
+              {article.mainImage.caption && (
+                <div className="bg-stone-50 px-6 py-3 text-sm text-stone-600">
+                  {article.mainImage.caption}
+                </div>
+              )}
+            </div>
+          )}
+
           {/* Download Box on Mobile/Tablet (shown inline, hidden on desktop) */}
           {downloadBoxes.length > 0 && (
             <div className="mb-8 lg:hidden">
@@ -102,6 +126,30 @@ export default async function ArticlePage({ params }: Props) {
 
           {article.body && (
             <div className="prose prose-lg prose-stone rounded-2xl bg-white p-8 shadow-lg ring-1 ring-stone-200/50 md:p-12">
+              {/* Floating Pull Quote */}
+              {article.pullQuote && (
+                <aside className="not-prose group relative my-8 md:float-right md:ml-8 md:mb-6 md:w-80">
+                  <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-emerald-50 to-teal-50 p-6 shadow-lg ring-1 ring-emerald-100/50 transition-all duration-300 hover:shadow-xl md:p-8">
+                    {/* Decorative Quote Mark */}
+                    <div className="absolute -right-2 -top-2 h-20 w-20 opacity-[0.08]">
+                      <svg
+                        fill="currentColor"
+                        viewBox="0 0 32 32"
+                        className="h-full w-full text-emerald-600"
+                      >
+                        <path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14h-4c0-2.2 1.8-4 4-4V8zm16 0c-3.3 0-6 2.7-6 6v10h10V14h-4c0-2.2 1.8-4 4-4V8z" />
+                      </svg>
+                    </div>
+
+                    <blockquote className="relative">
+                      <p className="font-serif text-lg font-medium leading-relaxed text-stone-800 md:text-xl">
+                        {article.pullQuote}
+                      </p>
+                    </blockquote>
+                  </div>
+                </aside>
+              )}
+
               <PortableText
                 value={article.body as PortableTextBlock[]}
                 components={{
