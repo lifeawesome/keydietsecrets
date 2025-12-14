@@ -1,11 +1,11 @@
-// middleware.ts
+// proxy.ts
 import { NextRequest, NextResponse } from "next/server";
 
 export const config = {
   matcher: "/studio/:path*",
 };
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   const url = req.nextUrl;
 
   // Skip authentication on localhost
@@ -50,6 +50,4 @@ export function middleware(req: NextRequest) {
     },
   });
 }
-
-
 
